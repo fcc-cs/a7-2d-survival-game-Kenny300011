@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfa6lktdfaueu"]
+
+[ext_resource type="Texture2D" uid="uid://04qeidjoinmf" path="res://icon.svg" id="1_qdiiy"]
+
+[node name="Apple Collectable" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qdiiy")
