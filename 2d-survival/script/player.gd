@@ -3,12 +3,18 @@ extends CharacterBody2D
 var speed = 100
 var state
 
+@export var inv: Inventory
+
 func _physics_process(delta):
 	var direction = Input.get_vector("left","right","up","down")
 	if direction.x == 0.0 and direction.y == 0.0:
 		state = "idle"
 	elif direction.x != 0 or direction.y != 0:
 		state = "walk"
+	if Input.is_action_pressed("Shift"):
+		speed = 150
+	else:
+		speed = 100
 	velocity = direction*speed
 	move_and_slide()
 	play_animation(direction)
