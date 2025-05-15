@@ -572,3 +572,8 @@ limit_right = 359
 limit_bottom = 239
 
 [node name="Inventory" parent="." instance=ExtResource("4_dqkch")]
+z_index = 3
+offset_left = -49.0
+offset_top = -83.0
+offset_right = 49.0
+offset_bottom = -16.0
