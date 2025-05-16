@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b4hvgfthxakmf"]
+[gd_scene load_steps=17 format=3 uid="uid://b4hvgfthxakmf"]
 
 [ext_resource type="PackedScene" uid="uid://bw23msufhj8xn" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Texture2D" uid="uid://hu3mytl5smxk" path="res://art/Environment/spr_grass_tileset.png" id="2_71j4m"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c5fewvhgwjuxg" path="res://art/Environment/survivalgame-terrian-water.png" id="6_qfnet"]
 [ext_resource type="PackedScene" uid="uid://lr4nj8lxhbnv" path="res://scenes/apple_tree.tscn" id="7_i7141"]
 [ext_resource type="PackedScene" uid="uid://brikei1kgqshb" path="res://scenes/stick.tscn" id="8_4mrxx"]
+[ext_resource type="PackedScene" uid="uid://bi38uu3gb6cds" path="res://scenes/slime.tscn" id="9_7r4gi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7r4gi"]
 texture = ExtResource("2_71j4m")
@@ -949,3 +950,6 @@ polygon = PackedVector2Array(149, -122, 158, -129, 288, -128, 289, -76, 154, -74
 position = Vector2(-140, -140)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_4mrxx")
+
+[node name="Slime" parent="." instance=ExtResource("9_7r4gi")]
+position = Vector2(134, 112)
