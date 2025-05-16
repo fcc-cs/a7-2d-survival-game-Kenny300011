@@ -11,6 +11,13 @@ var player
 func _ready():
 	dead = false
 	
+func _process(delta: float) -> void:
+	if dead and player_in_area:
+		if Input.is_action_just_pressed("Interact"):
+			player.collect(itm_res)
+			await get_tree().create_timer(0.1).timeout
+			queue_free()
+
 func _physics_process(delta: float) -> void:
 	if !dead:
 		$player_detection/CollisionShape2D.disabled = false
@@ -52,20 +59,19 @@ func death():
 	$AnimatedSprite2D.visible = false
 	$Hitbox/CollisionShape2D.disabled = true
 	$player_detection/CollisionShape2D.disabled = true
+	$CollisionShape2D.disabled = true
 	
 func drop_slime():
+	player_in_area = false
 	slime.visible = true
-	$slime_col_area/CollisionShape2D.disabled = false
-	slime_collect()
-	
-func slime_collect():
-	await get_tree().create_timer(1.5).timeout
-	slime.visible = false
-	player.collect(itm_res)
-	queue_free()
+	$Slime_Collectable/CollisionShape2D.disabled = false
 
-
-func _on_slime_col_area_body_entered(body: Node2D) -> void:
+func _on_slime_collectable_body_entered(body: Node2D) -> void:
 	if body.has_method("player"):
 		player = body
-		
+		player_in_area = true
+
+
+func _on_slime_collectable_body_exited(body: Node2D) -> void:
+	if body.has_method("player"):
+		player_in_area = false

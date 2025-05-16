@@ -1,10 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c1ydilkbx6mv7"]
+[gd_scene load_steps=2 format=3 uid="uid://cbf48jydxnvh0"]
 
 [ext_resource type="Texture2D" uid="uid://4jxrlm1mkenc" path="res://art/Environment/slime-icon.png" id="1_og2ay"]
 
-[node name="Slime_Collectable" type="StaticBody2D"]
+[node name="Area2D" type="Area2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-scale = Vector2(0.5, 0.5)
+position = Vector2(-4.76837e-07, 4.76837e-07)
+scale = Vector2(0.4375, 0.4375)
 texture = ExtResource("1_og2ay")
