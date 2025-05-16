@@ -577,3 +577,5 @@ offset_left = -49.0
 offset_top = -83.0
 offset_right = 49.0
 offset_bottom = -16.0
+
+[node name="Marker2D" type="Marker2D" parent="."]

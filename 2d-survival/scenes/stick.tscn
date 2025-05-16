@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://brikei1kgqshb"]
 
 [ext_resource type="Texture2D" uid="uid://pialbuqxnesu" path="res://art/Environment/stick-icon.png" id="1_i3vek"]
-[ext_resource type="Script" uid="uid://cfxrrnjk33nil" path="res://scenes/stick_collect.gd" id="1_m8wbh"]
+[ext_resource type="Script" uid="uid://cfxrrnjk33nil" path="res://script/stick_collect.gd" id="1_m8wbh"]
 [ext_resource type="Resource" uid="uid://c5a2h12ehuw1e" path="res://inventory/Items/stick.tres" id="2_ia1hn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ld7er"]
