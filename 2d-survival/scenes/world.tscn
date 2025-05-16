@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b4hvgfthxakmf"]
+[gd_scene load_steps=16 format=3 uid="uid://b4hvgfthxakmf"]
 
 [ext_resource type="PackedScene" uid="uid://bw23msufhj8xn" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Texture2D" uid="uid://hu3mytl5smxk" path="res://art/Environment/spr_grass_tileset.png" id="2_71j4m"]
@@ -777,12 +777,14 @@ texture_region_size = Vector2i(40, 40)
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
+2:0/0/y_sort_origin = 17
 3:0/0 = 0
 4:0/0 = 0
 5:0/0 = 0
 6:0/0 = 0
 7:0/0 = 0
 8:0/0 = 0
+8:0/0/y_sort_origin = 12
 8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.52887, 8.48753, 3.48207, 7.61702, 9.14042, 7.83465, 7.61702, 12.1872, 3.91732, 15.0164, -0.652887, 14.5811, -5.00547, 13.9283, -6.31124, 11.5343)
 9:0/0 = 0
 10:0/0 = 0
@@ -802,6 +804,7 @@ texture_region_size = Vector2i(40, 40)
 6:1/0 = 0
 7:1/0 = 0
 8:1/0 = 0
+8:1/0/y_sort_origin = 12
 8:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.9696, 5.87599, 3.04681, 5.00547, 3.26444, 9.35805, 1.95866, 10.4462, -0.217628, 13.493, -5.00547, 13.9283, -10.0109, 11.752)
 9:1/0 = 0
 10:1/0 = 0
@@ -821,6 +824,7 @@ texture_region_size = Vector2i(40, 40)
 6:2/0 = 0
 7:2/0 = 0
 8:2/0 = 0
+8:2/0/y_sort_origin = 12
 8:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.04681, 8.48753, 14.1459, 7.83465, 13.2754, 12.8401, 10.8815, 14.5811, 0.870516, 15.234, -2.17629, 13.0577)
 9:2/0 = 0
 10:2/0 = 0
@@ -894,7 +898,12 @@ sources/3 = SubResource("TileSetAtlasSource_e3hyu")
 sources/4 = SubResource("TileSetAtlasSource_q5onr")
 sources/5 = SubResource("TileSetAtlasSource_i7141")
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4mrxx"]
+radius = 17.0
+height = 110.0
+
 [node name="World" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
 
@@ -930,4 +939,13 @@ position = Vector2(265, -105)
 [node name="Collisions" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collisions"]
-polygon = PackedVector2Array(-339, -239, -342, -213, -329, -184, -331, -83, -180, -76, -166, -59, -165, 99, -185, 115, -339, 116, -361, 99, -358, 133, -329, 174, -47, 178, -48, 296, 9, 294, 11, 174, 342, 178, 320, 99, 336, 44, 427, 43, 424, -7, 316, -3, 333, -73, 318, -106, 333, -135, 322, -176, 329, -207, 3, -208, 1, -299, -47, -300, -41, -206, -330, -208, -329, -264, 380, -401, 583, 172, -54, 411, -588, 204, -369, -289, -333, -244, -334, -209)
+position = Vector2(85, 45)
+polygon = PackedVector2Array(-430, -285, -430, -262, -422, -250, -128, -251, -125, -255, -125, -332, -85, -332, -85, -254, -79, -250, 254, -251, 260, -261, 260, -285, 275, -285, 275, -45, 310, -45, 310, -7, 275, -7, 275, 128, -77, 127, -77, 235, -134, 234, -134, 127, -411, 127, -412, 109, -422, 97, -435, 98, -445, 86, -445, 72, -445, 72, -445, 69, -265, 70, -250, 54, -250, -105, -267, -120, -414, -120, -414, -232, -423, -242, -424, -249, -434, -264, -434, -286, -467, -293, -469, 283, 302, 227, 361, -94, 284, -335, -124, -377, -436, -318, -432, -282)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Collisions"]
+polygon = PackedVector2Array(149, -122, 158, -129, 288, -128, 289, -76, 154, -74, 147, -84, 136, -83, 136, -57, 142, -47, 297, -45, 305, -56, 306, -125, 293, -135, 145, -135, 134, -118)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions"]
+position = Vector2(-140, -140)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_4mrxx")

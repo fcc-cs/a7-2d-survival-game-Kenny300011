@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://lr4nj8lxhbnv"]
+[gd_scene load_steps=9 format=3 uid="uid://lr4nj8lxhbnv"]
 
 [ext_resource type="Script" uid="uid://bsa2nissiy5s" path="res://script/apple_tree.gd" id="1_66v30"]
 [ext_resource type="Texture2D" uid="uid://pqbs1auinwib" path="res://art/Environment/survivalgame-appletree.png" id="1_rf3rb"]
@@ -34,6 +34,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_273gb"]
 radius = 18.3576
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_veaef"]
+size = Vector2(15, 10)
+
 [node name="Apple Tree" type="Node2D"]
 script = ExtResource("1_66v30")
 item = ExtResource("2_veaef")
@@ -52,6 +55,12 @@ shape = SubResource("CircleShape2D_273gb")
 [node name="Growth" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="Collision" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
+position = Vector2(0.5, 10)
+shape = SubResource("RectangleShape2D_veaef")
 
 [connection signal="body_entered" from="pickarea" to="." method="_on_pickarea_body_entered"]
 [connection signal="body_exited" from="pickarea" to="." method="_on_pickarea_body_exited"]
