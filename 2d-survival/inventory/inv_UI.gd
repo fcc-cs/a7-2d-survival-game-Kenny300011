@@ -10,7 +10,7 @@ func _ready():
 	close()
 
 func update_slots():
-	for i in range(min(Inv.items.size(),slots.size())):
+	for i in range(min(Inv.slots.size(),slots.size())):
 		slots[i].update(Inv.items[i])
 
 func _process(delta: float) -> void:
