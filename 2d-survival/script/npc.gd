@@ -40,11 +40,12 @@ func _process(delta: float) -> void:
 				move(delta)
 	if player_in_chat:
 		if Input.is_action_just_pressed("Interact"):
-			print("chatting")
-			is_roaming = !is_roaming
-			is_chatting = !is_chatting
+			$Dialogue.start()
+			$Chat_Detection/CollisionShape2D.disabled = true
+			is_roaming = false
+			is_chatting = true
 			$AnimatedSprite2D.play()
-				
+					
 func choose(arr):
 	arr.shuffle()
 	return arr.front()
@@ -69,3 +70,9 @@ func _on_chat_detection_body_exited(body: Node2D) -> void:
 func _on_timer_timeout() -> void:
 	$Timer.wait_time = choose([0.5,1,1.5])
 	current_state = choose([Idle,NewDir,Move])
+
+
+func _on_dialogue_d_finished() -> void:
+	is_roaming = true
+	is_chatting = false
+	$Chat_Detection/CollisionShape2D.disabled = false

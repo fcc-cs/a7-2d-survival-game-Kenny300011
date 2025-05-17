@@ -779,7 +779,7 @@ texture_region_size = Vector2i(40, 40)
 1:0/0 = 0
 1:0/0/y_sort_origin = 12
 2:0/0 = 0
-2:0/0/y_sort_origin = 17
+2:0/0/y_sort_origin = 12
 3:0/0 = 0
 3:0/0/y_sort_origin = 12
 4:0/0 = 0
@@ -829,15 +829,15 @@ texture_region_size = Vector2i(40, 40)
 0:2/0 = 0
 0:2/0/y_sort_origin = -10
 1:2/0 = 0
-1:2/0/y_sort_origin = 10
+1:2/0/y_sort_origin = 12
 2:2/0 = 0
-2:2/0/y_sort_origin = -10
+2:2/0/y_sort_origin = 12
 3:2/0 = 0
-3:2/0/y_sort_origin = 10
+3:2/0/y_sort_origin = 12
 4:2/0 = 0
-4:2/0/y_sort_origin = 10
+4:2/0/y_sort_origin = 12
 5:2/0 = 0
-5:2/0/y_sort_origin = 10
+5:2/0/y_sort_origin = 12
 6:2/0 = 0
 7:2/0 = 0
 8:2/0 = 0
@@ -998,9 +998,11 @@ radial_accel_min = -2.23517e-06
 radial_accel_max = 27.58
 
 [node name="Forest" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_i1yi8")
 
 [node name="ForestMain" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="TileMap" type="TileMap" parent="ForestMain"]
 y_sort_enabled = true
@@ -1049,6 +1051,7 @@ visible = false
 position = Vector2(-48, 665)
 
 [node name="ForestCutscene" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="ColorRect" type="ColorRect" parent="ForestCutscene"]
 z_index = 1
@@ -1067,7 +1070,7 @@ libraries = {
 [node name="Player_detection" type="Area2D" parent="ForestCutscene"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ForestCutscene/Player_detection"]
-position = Vector2(-19, 231)
+position = Vector2(-20, 248)
 shape = SubResource("RectangleShape2D_0nboi")
 
 [node name="Path2D" type="Path2D" parent="ForestCutscene"]
