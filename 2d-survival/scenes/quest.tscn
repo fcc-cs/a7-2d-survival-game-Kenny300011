@@ -87,7 +87,7 @@ offset_top = 8.0
 offset_right = 199.0
 offset_bottom = 103.0
 scale = Vector2(0.4, 0.4)
-text = "No Current Quest."
+text = "No quest available, come back after a while."
 
 [node name="Quest Finished" type="NinePatchRect" parent="."]
 visible = false
@@ -117,6 +117,35 @@ offset_right = 199.0
 offset_bottom = 103.0
 scale = Vector2(0.4, 0.4)
 text = "Thank you!"
+
+[node name="Quest_active" type="NinePatchRect" parent="."]
+visible = false
+offset_left = -41.0
+offset_top = -58.0
+offset_right = 41.0
+offset_bottom = -11.0
+texture = ExtResource("1_y6gx0")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Name" type="RichTextLabel" parent="Quest_active"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 82.0
+offset_bottom = 24.0
+scale = Vector2(0.4, 0.4)
+text = "Worker:"
+
+[node name="Text" type="RichTextLabel" parent="Quest_active"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 8.0
+offset_right = 199.0
+offset_bottom = 103.0
+scale = Vector2(0.4, 0.4)
+text = "Complete your quest"
 
 [connection signal="pressed" from="Quest1_UI/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="Quest1_UI/No" to="." method="_on_no_pressed"]

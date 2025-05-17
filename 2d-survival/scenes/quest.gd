@@ -11,9 +11,9 @@ func quest1_chat():
 func _process(delta: float) -> void:
 	if quest1_active:
 		if stick == 3:
-			print("Quest Complete")
 			quest1_active = false
 			quest1_complete = true
+			play_finish_quest_anim()
 		
 func _on_yes_pressed() -> void:
 	$Quest1_UI.visible = false
@@ -28,9 +28,21 @@ func _on_no_pressed() -> void:
 	emit_signal("quest_menu_closed")
 
 func next_quest():
-	if !quest1_complete:
+	if !quest1_complete and !quest1_active:
 		quest1_chat()
+	elif quest1_active:
+		$Quest_active.visible = true
+		await get_tree().create_timer(3).timeout
+		$Quest_active.visible = false
 	else:
 		$No_Quest.visible = true
 		await get_tree().create_timer(3).timeout
 		$No_Quest.visible = false
+
+func stick_collected():
+	stick += 1
+
+func play_finish_quest_anim():
+	$"Quest Finished".visible = true
+	await get_tree().create_timer(3).timeout
+	$"Quest Finished".visible = false

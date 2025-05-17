@@ -3,6 +3,10 @@ extends CharacterBody2D
 var speed = 100
 var state
 var health = 50
+signal stick_collected
+signal apple_collected
+signal slime_collected
+var p_stop = false
 
 @export var inv: Inventory
 var bow_equiped = false
@@ -24,7 +28,7 @@ func _physics_process(delta):
 		speed = 150
 	else:
 		speed = 100
-	if !playerstop:
+	if !p_stop and !playerstop:
 		velocity = direction*speed
 		move_and_slide()
 	
@@ -122,6 +126,17 @@ func player():
 
 func collect(item):
 	inv.insert(item)
+	print(item)
+	if str(item) == "<Resource#-9223371999072483866>":
+		emit_signal("stick_collected")
 
 func take_damage(dmg):
 	pass
+
+
+func _on_forest_p_stop() -> void:
+	p_stop = true
+
+
+func _on_forest_p_start() -> void:
+	p_stop = false

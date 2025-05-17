@@ -9,6 +9,8 @@ var player = null
 var is_pathfollowing = false
 var smoke_happened = false
 var smoke_happening = false
+signal p_stop
+signal p_start
 
 func _physics_process(delta: float) -> void:
 	if is_openingcutscene:
@@ -71,6 +73,7 @@ func _on_player_detection_body_entered(body: Node2D) -> void:
 	if body.has_method("player"):
 		player = body
 		if !has_player_entered_area:
+			emit_signal("p_stop")
 			has_player_entered_area = true
 			cutscene()
 			
@@ -89,6 +92,7 @@ func cutsceneclose():
 	player.camera.limit_bottom = 719
 	$ForestCutscene.visible = false
 	$ForestMain.visible = true
+	emit_signal("p_start")
 
 func toggle_smoke():
 	var smoke6 = $ForestCutscene/SmokeParticle6
