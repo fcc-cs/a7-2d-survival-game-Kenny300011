@@ -609,7 +609,7 @@ zoom = Vector2(2.5, 2.5)
 limit_left = -359
 limit_top = -239
 limit_right = 359
-limit_bottom = 719
+limit_bottom = 239
 
 [node name="Inventory" parent="." instance=ExtResource("4_dqkch")]
 z_index = 3
