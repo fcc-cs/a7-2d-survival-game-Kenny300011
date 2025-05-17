@@ -129,6 +129,8 @@ func collect(item):
 	print(item)
 	if str(item) == "<Resource#-9223371999072483866>":
 		emit_signal("stick_collected")
+	elif str(item) == "<Resource#-9223371996220357102>":
+		emit_signal("slime_collected")
 
 func take_damage(dmg):
 	pass

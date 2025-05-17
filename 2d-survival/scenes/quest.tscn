@@ -12,6 +12,7 @@ script = ExtResource("1_7fbp7")
 
 [node name="Quest1_UI" type="NinePatchRect" parent="."]
 visible = false
+layout_mode = 0
 offset_left = -41.0
 offset_top = -58.0
 offset_right = 41.0
@@ -51,6 +52,7 @@ text = "YES"
 
 [node name="No" type="Button" parent="Quest1_UI"]
 modulate = Color(0.854902, 0, 0.278431, 1)
+layout_mode = 0
 offset_left = 49.0
 offset_top = 31.0
 offset_right = 85.0
@@ -62,6 +64,7 @@ icon_alignment = 1
 
 [node name="No_Quest" type="NinePatchRect" parent="."]
 visible = false
+layout_mode = 0
 offset_left = -41.0
 offset_top = -58.0
 offset_right = 41.0
@@ -91,6 +94,7 @@ text = "No quest available, come back after a while."
 
 [node name="Quest Finished" type="NinePatchRect" parent="."]
 visible = false
+layout_mode = 0
 offset_left = -41.0
 offset_top = -58.0
 offset_right = 41.0
@@ -120,6 +124,7 @@ text = "Thank you!"
 
 [node name="Quest_active" type="NinePatchRect" parent="."]
 visible = false
+layout_mode = 0
 offset_left = -41.0
 offset_top = -58.0
 offset_right = 41.0
@@ -147,5 +152,87 @@ offset_bottom = 103.0
 scale = Vector2(0.4, 0.4)
 text = "Complete your quest"
 
+[node name="Quest2_UI" type="NinePatchRect" parent="."]
+visible = false
+offset_left = -41.0
+offset_top = -58.0
+offset_right = 41.0
+offset_bottom = -11.0
+texture = ExtResource("1_y6gx0")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Name" type="RichTextLabel" parent="Quest2_UI"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 82.0
+offset_bottom = 24.0
+scale = Vector2(0.4, 0.4)
+text = "Worker:"
+
+[node name="Text" type="RichTextLabel" parent="Quest2_UI"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 8.0
+offset_right = 199.0
+offset_bottom = 103.0
+scale = Vector2(0.4, 0.4)
+text = "Forest is full of slimes. Please slay them so our town is safe!"
+
+[node name="Yes" type="Button" parent="Quest2_UI"]
+modulate = Color(0.263772, 0.647607, 0.175538, 1)
+layout_mode = 0
+offset_left = 14.0
+offset_top = 31.0
+offset_right = 50.0
+offset_bottom = 62.0
+scale = Vector2(0.4, 0.4)
+text = "YES"
+
+[node name="No" type="Button" parent="Quest2_UI"]
+modulate = Color(0.854902, 0, 0.278431, 1)
+layout_mode = 0
+offset_left = 49.0
+offset_top = 31.0
+offset_right = 85.0
+offset_bottom = 62.0
+scale = Vector2(0.4, 0.4)
+text = "NO
+"
+icon_alignment = 1
+
+[node name="Quest Finished2" type="NinePatchRect" parent="."]
+visible = false
+offset_left = -41.0
+offset_top = -58.0
+offset_right = 41.0
+offset_bottom = -11.0
+texture = ExtResource("1_y6gx0")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Name" type="RichTextLabel" parent="Quest Finished2"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 82.0
+offset_bottom = 24.0
+scale = Vector2(0.4, 0.4)
+text = "Worker:"
+
+[node name="Text" type="RichTextLabel" parent="Quest Finished2"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 8.0
+offset_right = 199.0
+offset_bottom = 103.0
+scale = Vector2(0.4, 0.4)
+text = "Thank you! Now travellers can go to forest safely. These slime drops can be sold in store."
+
 [connection signal="pressed" from="Quest1_UI/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="Quest1_UI/No" to="." method="_on_no_pressed"]
+[connection signal="pressed" from="Quest2_UI/Yes" to="." method="_on_yes_pressed"]
+[connection signal="pressed" from="Quest2_UI/No" to="." method="_on_no_pressed"]

@@ -53,4 +53,5 @@ shape = SubResource("CircleShape2D_x2mh3")
 
 [connection signal="body_entered" from="player_detection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="player_detection" to="." method="_on_player_detection_body_exited"]
+[connection signal="dem_finish" from="Quest" to="." method="_on_quest_dem_finish"]
 [connection signal="quest_menu_closed" from="Quest" to="." method="_on_quest_quest_menu_closed"]

@@ -960,6 +960,7 @@ position = Vector2(-130, -101)
 [node name="Quest_NPC" parent="." instance=ExtResource("11_e3hyu")]
 position = Vector2(41, 124)
 
+[connection signal="slime_collected" from="Player" to="Quest_NPC" method="_on_player_slime_collected"]
 [connection signal="stick_collected" from="Player" to="Quest_NPC" method="_on_player_stick_collected"]
 [connection signal="p_start" from="Forest" to="Player" method="_on_forest_p_start"]
 [connection signal="p_stop" from="Forest" to="Player" method="_on_forest_p_stop"]
