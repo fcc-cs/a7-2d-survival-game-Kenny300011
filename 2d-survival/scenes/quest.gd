@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 			quest1_active = false
 			quest1_complete = true
 			play_finish_quest_anim()
-	if quest2_active:
+	elif quest2_active:
 		if slime == 8:
 			quest2_active = false
 			quest2_complete = true

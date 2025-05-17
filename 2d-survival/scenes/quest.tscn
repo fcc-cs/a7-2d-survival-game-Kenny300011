@@ -154,6 +154,7 @@ text = "Complete your quest"
 
 [node name="Quest2_UI" type="NinePatchRect" parent="."]
 visible = false
+layout_mode = 0
 offset_left = -41.0
 offset_top = -58.0
 offset_right = 41.0
@@ -205,6 +206,7 @@ icon_alignment = 1
 
 [node name="Quest Finished2" type="NinePatchRect" parent="."]
 visible = false
+layout_mode = 0
 offset_left = -41.0
 offset_top = -58.0
 offset_right = 41.0

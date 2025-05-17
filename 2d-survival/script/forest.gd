@@ -80,6 +80,7 @@ func _on_player_detection_body_entered(body: Node2D) -> void:
 func cutscene():
 	is_openingcutscene = true
 	animationplayer.play("Fade")
+	player.canvas.visible = false
 	player.camera.enabled = false
 	camera.enabled = true
 	is_pathfollowing = true
@@ -88,6 +89,7 @@ func cutsceneclose():
 	is_pathfollowing = false
 	is_openingcutscene = false
 	camera.enabled = false
+	player.canvas.visible = true
 	player.camera.enabled = true
 	player.camera.limit_bottom = 719
 	$ForestCutscene.visible = false

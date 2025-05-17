@@ -1,12 +1,16 @@
 extends CharacterBody2D
 
+class_name pl
+
 var speed = 100
 var state
-var health = 50
+var health = 100
+@onready var health_bar = $CanvasLayer/HealthBar
 signal stick_collected
 signal apple_collected
 signal slime_collected
 var p_stop = false
+var playerdead = false
 
 @export var inv: Inventory
 var bow_equiped = false
@@ -16,7 +20,11 @@ var mouse_loc_from_player = null
 var bow_aim = false
 var playerstop = false
 @onready var camera = $Camera2D
+@onready var canvas = $CanvasLayer
 
+func _ready() -> void:
+	pass
+	
 func _physics_process(delta):
 	mouse_loc_from_player = get_global_mouse_position() - self.position
 	var direction = Input.get_vector("left","right","up","down")
@@ -28,7 +36,7 @@ func _physics_process(delta):
 		speed = 150
 	else:
 		speed = 100
-	if !p_stop and !playerstop:
+	if !p_stop and !playerstop and !playerdead:
 		velocity = direction*speed
 		move_and_slide()
 	
@@ -63,10 +71,16 @@ func _physics_process(delta):
 		bow_cooldown = true
 		bow_equiped = true
 		state = "stand_by"
-	play_animation(direction)
+	if !playerdead:
+		play_animation(direction)
 	
 func play_animation(dir):
-	if !bow_aim:
+	if health <= 0:
+		$AnimatedSprite2D.play("Death")
+		playerstop = true
+		playerdead = true
+		gameover()
+	if !bow_aim and !playerstop:
 		if state == "idle":
 			$AnimatedSprite2D.play("Idle")
 		if state == "walk":
@@ -127,9 +141,9 @@ func player():
 func collect(item):
 	inv.insert(item)
 	print(item)
-	if str(item) == "<Resource#-9223371999072483866>":
+	if str(item) == "<Resource#-9223371998770493972>":
 		emit_signal("stick_collected")
-	elif str(item) == "<Resource#-9223371996220357102>":
+	elif str(item) == "<Resource#-9223371995918367208>":
 		emit_signal("slime_collected")
 
 func take_damage(dmg):
@@ -142,3 +156,19 @@ func _on_forest_p_stop() -> void:
 
 func _on_forest_p_start() -> void:
 	p_stop = false
+	
+func got_hit(dmg,src_position):
+	health -= dmg
+	health_bar.value = health
+	playerstop = true
+	var pushback_dir = (global_position - src_position).normalized()
+	var pushback_dist = 15
+	var target_pos = global_position + pushback_dir * pushback_dist
+	var tween = create_tween()
+	tween.tween_property(self,"global_position",target_pos,0.2)
+	await get_tree().create_timer(0.5).timeout
+	playerstop = false
+
+func gameover():
+	await get_tree().create_timer(3).timeout
+	

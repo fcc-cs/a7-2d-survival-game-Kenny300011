@@ -172,6 +172,7 @@ radius = 93.1343
 radius = 3.60555
 
 [node name="Slime" type="CharacterBody2D"]
+z_index = -1
 script = ExtResource("1_p2gj0")
 itm_res = ExtResource("2_pjw23")
 
@@ -209,6 +210,7 @@ visible = false
 shape = SubResource("CircleShape2D_pjw23")
 disabled = true
 
+[connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="player_detection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="player_detection" to="." method="_on_player_detection_body_exited"]

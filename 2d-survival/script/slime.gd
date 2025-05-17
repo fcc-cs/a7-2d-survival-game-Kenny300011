@@ -5,6 +5,7 @@ var health = 100
 var dead = false
 var player_in_area = false
 var player
+var player_died = false
 @onready var slime = $Slime_Collectable
 @export var itm_res: invitem
 
@@ -19,14 +20,16 @@ func _process(delta: float) -> void:
 			queue_free()
 
 func _physics_process(delta: float) -> void:
-	if !dead:
+	if player_died:
+		$player_detection/CollisionShape2D.disabled = true
+	elif !dead:
 		$player_detection/CollisionShape2D.disabled = false
 		if player_in_area:
 			position += (player.position - position)/speed
 			$AnimatedSprite2D.play("Move")
 		else:
 			$AnimatedSprite2D.play("Idle")
-	if dead:
+	elif dead:
 		$player_detection/CollisionShape2D.disabled = true
 
 func _on_player_detection_body_entered(body: Node2D) -> void:
@@ -57,6 +60,7 @@ func death():
 	await get_tree().create_timer(1).timeout
 	drop_slime()
 	$AnimatedSprite2D.visible = false
+	$Attack/CollisionShape2D.disabled = true
 	$Hitbox/CollisionShape2D.disabled = true
 	$player_detection/CollisionShape2D.disabled = true
 	$CollisionShape2D.disabled = true
@@ -75,3 +79,11 @@ func _on_slime_collectable_body_entered(body: Node2D) -> void:
 func _on_slime_collectable_body_exited(body: Node2D) -> void:
 	if body.has_method("player"):
 		player_in_area = false
+
+
+func _on_attack_body_entered(body: Node2D) -> void:
+	if body.has_method("player"):
+		player = body
+		player.got_hit(20,global_position)
+		if player.health <=0:
+			player_died = true
