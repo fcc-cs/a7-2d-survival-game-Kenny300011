@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://7k6hgu6eh2ny"]
+
+[ext_resource type="Texture2D" uid="uid://ba7lca0o1e5eq" path="res://art/Character/Human-Worker-Red.png" id="1_00qlt"]
+[ext_resource type="Script" uid="uid://dkp7ysh6rrmey" path="res://scenes/quest_npc.gd" id="1_2wgef"]
+[ext_resource type="PackedScene" uid="uid://c3fgbwbcqkw34" path="res://scenes/quest.tscn" id="2_1o2gl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wgef"]
+atlas = ExtResource("1_00qlt")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2mh3"]
+atlas = ExtResource("1_00qlt")
+region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1o2gl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wgef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2mh3")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2wgef"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x2mh3"]
+
+[node name="Quest_NPC" type="CharacterBody2D"]
+script = ExtResource("1_2wgef")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.281, 1.219)
+sprite_frames = SubResource("SpriteFrames_1o2gl")
+animation = &"Idle"
+frame_progress = 0.901095
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_2wgef")
+
+[node name="player_detection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_detection"]
+shape = SubResource("CircleShape2D_x2mh3")
+
+[node name="Quest" parent="." instance=ExtResource("2_1o2gl")]
+
+[connection signal="body_entered" from="player_detection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="player_detection" to="." method="_on_player_detection_body_exited"]
+[connection signal="quest_menu_closed" from="Quest" to="." method="_on_quest_quest_menu_closed"]
