@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var speed = 100
 var state
+var health = 50
 
 @export var inv: Inventory
 var bow_equiped = false
@@ -10,6 +11,7 @@ var arrow = preload("res://scenes/arrow.tscn")
 var mouse_loc_from_player = null
 var bow_aim = false
 var playerstop = false
+@onready var camera = $Camera2D
 
 func _physics_process(delta):
 	mouse_loc_from_player = get_global_mouse_position() - self.position
@@ -37,6 +39,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("right_mouse"):
 		if bow_equiped:
+			state = "stand_by"
 			playerstop = true
 			bow_aim = true
 	else:
@@ -44,13 +47,18 @@ func _physics_process(delta):
 		playerstop = false
 	
 	if Input.is_action_just_pressed("left_mouse") and bow_aim and bow_cooldown:
+		state = "launch"
 		bow_cooldown = false
 		var arrow_instance = arrow.instantiate()
 		arrow_instance.rotation = $Marker2D.rotation
 		arrow_instance.global_position = $Marker2D.global_position
 		add_child(arrow_instance)
+		play_animation(direction)
+		bow_equiped = false
 		await get_tree().create_timer(1).timeout
 		bow_cooldown = true
+		bow_equiped = true
+		state = "stand_by"
 	play_animation(direction)
 	
 func play_animation(dir):
@@ -75,25 +83,45 @@ func play_animation(dir):
 			if dir.y < -0.5 and dir.x < -0.5:
 				$AnimatedSprite2D.play("NW-Walk")
 	if bow_aim:
-		if mouse_loc_from_player.x >= -25 and mouse_loc_from_player.x <= 25 and mouse_loc_from_player.y < 0:
-			$AnimatedSprite2D.play("N-Attack")
-		if mouse_loc_from_player.y >= -25 and mouse_loc_from_player.y <= 25 and mouse_loc_from_player.x > 0:
-			$AnimatedSprite2D.play("E-Attack")
-		if mouse_loc_from_player.x >= -25 and mouse_loc_from_player.x <= 25 and mouse_loc_from_player.y > 0:
-			$AnimatedSprite2D.play("S-Attack")
-		if mouse_loc_from_player.y >= -25 and mouse_loc_from_player.y <= 25 and mouse_loc_from_player.x < 0:
-			$AnimatedSprite2D.play("W-Attack")
-		if mouse_loc_from_player.x >=25 and mouse_loc_from_player.y <= -25:
-			$AnimatedSprite2D.play("NE-Attack")
-		if mouse_loc_from_player.x >=0.5 and mouse_loc_from_player.y >= 25:
-			$AnimatedSprite2D.play("SE-Attack")
-		if mouse_loc_from_player.x <= -0.5 and mouse_loc_from_player.y >= 25:
-			$AnimatedSprite2D.play("WS-Attack")
-		if mouse_loc_from_player.x <= -25 and mouse_loc_from_player.y <= -25:
-			$AnimatedSprite2D.play("NW-Attack")
-
+		if state == "stand_by":
+			if mouse_loc_from_player.x >= -25 and mouse_loc_from_player.x <= 25 and mouse_loc_from_player.y < 0:
+				$AnimatedSprite2D.play("N-Attack")
+			if mouse_loc_from_player.y >= -25 and mouse_loc_from_player.y <= 25 and mouse_loc_from_player.x > 0:
+				$AnimatedSprite2D.play("E-Attack")
+			if mouse_loc_from_player.x >= -25 and mouse_loc_from_player.x <= 25 and mouse_loc_from_player.y > 0:
+				$AnimatedSprite2D.play("S-Attack")
+			if mouse_loc_from_player.y >= -25 and mouse_loc_from_player.y <= 25 and mouse_loc_from_player.x < 0:
+				$AnimatedSprite2D.play("W-Attack")
+			if mouse_loc_from_player.x >=25 and mouse_loc_from_player.y <= -25:
+				$AnimatedSprite2D.play("NE-Attack")
+			if mouse_loc_from_player.x >=0.5 and mouse_loc_from_player.y >= 25:
+				$AnimatedSprite2D.play("SE-Attack")
+			if mouse_loc_from_player.x <= -0.5 and mouse_loc_from_player.y >= 25:
+				$AnimatedSprite2D.play("WS-Attack")
+			if mouse_loc_from_player.x <= -25 and mouse_loc_from_player.y <= -25:
+				$AnimatedSprite2D.play("NW-Attack")
+		elif state == "launch":
+			if mouse_loc_from_player.x >= -25 and mouse_loc_from_player.x <= 25 and mouse_loc_from_player.y < 0:
+				$AnimatedSprite2D.play("N-ArrowLaunch")
+			if mouse_loc_from_player.y >= -25 and mouse_loc_from_player.y <= 25 and mouse_loc_from_player.x > 0:
+				$AnimatedSprite2D.play("E-ArrowLaunch")
+			if mouse_loc_from_player.x >= -25 and mouse_loc_from_player.x <= 25 and mouse_loc_from_player.y > 0:
+				$AnimatedSprite2D.play("S-ArrowLaunch")
+			if mouse_loc_from_player.y >= -25 and mouse_loc_from_player.y <= 25 and mouse_loc_from_player.x < 0:
+				$AnimatedSprite2D.play("W-ArrowLaunch")
+			if mouse_loc_from_player.x >=25 and mouse_loc_from_player.y <= -25:
+				$AnimatedSprite2D.play("NE-ArrowLaunch")
+			if mouse_loc_from_player.x >=0.5 and mouse_loc_from_player.y >= 25:
+				$AnimatedSprite2D.play("SE-ArrowLaunch")
+			if mouse_loc_from_player.x <= -0.5 and mouse_loc_from_player.y >= 25:
+				$AnimatedSprite2D.play("WS-ArrowLaunch")
+			if mouse_loc_from_player.x <= -25 and mouse_loc_from_player.y <= -25:
+				$AnimatedSprite2D.play("NW-ArrowLaunch")
 func player():
 	pass
 
 func collect(item):
 	inv.insert(item)
+
+func take_damage(dmg):
+	pass

@@ -1,9 +1,12 @@
-[gd_scene load_steps=29 format=3 uid="uid://bi38uu3gb6cds"]
+[gd_scene load_steps=30 format=3 uid="uid://bi38uu3gb6cds"]
 
 [ext_resource type="Texture2D" uid="uid://ssu4xc2yivax" path="res://art/Character/survivalgame-enemy-slime.png" id="1_371uh"]
 [ext_resource type="Script" uid="uid://c6wpc4v6cy0kl" path="res://script/slime.gd" id="1_p2gj0"]
 [ext_resource type="Resource" uid="uid://6prwke1i7v3m" path="res://inventory/Items/slime_drop.tres" id="2_pjw23"]
 [ext_resource type="PackedScene" uid="uid://cbf48jydxnvh0" path="res://scenes/slime_collectable.tscn" id="3_n6pvg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2npkn"]
+radius = 7.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p2gj0"]
 atlas = ExtResource("1_371uh")
@@ -172,6 +175,12 @@ radius = 3.60555
 script = ExtResource("1_p2gj0")
 itm_res = ExtResource("2_pjw23")
 
+[node name="Attack" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_2npkn")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pbccl")
 animation = &"Idle"
@@ -190,7 +199,7 @@ shape = SubResource("CircleShape2D_w8bnk")
 [node name="player_detection" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_detection"]
-position = Vector2(1, 0)
+position = Vector2(2, 0)
 shape = SubResource("CircleShape2D_1kmbt")
 
 [node name="Slime_Collectable" parent="." instance=ExtResource("3_n6pvg")]

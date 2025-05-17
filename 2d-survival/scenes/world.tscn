@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://c5fewvhgwjuxg" path="res://art/Environment/survivalgame-terrian-water.png" id="6_qfnet"]
 [ext_resource type="PackedScene" uid="uid://lr4nj8lxhbnv" path="res://scenes/apple_tree.tscn" id="7_i7141"]
 [ext_resource type="PackedScene" uid="uid://brikei1kgqshb" path="res://scenes/stick.tscn" id="8_4mrxx"]
-[ext_resource type="PackedScene" uid="uid://bi38uu3gb6cds" path="res://scenes/slime.tscn" id="9_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://cnfda0pucuc7a" path="res://scenes/forest.tscn" id="10_w7kh3"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7r4gi"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e3hyu"]
 texture = ExtResource("2_71j4m")
 texture_region_size = Vector2i(40, 40)
 0:0/0 = 0
@@ -430,7 +430,7 @@ texture_region_size = Vector2i(40, 40)
 18:22/0 = 0
 19:22/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w7kh3"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q5onr"]
 texture = ExtResource("3_qfnet")
 texture_region_size = Vector2i(40, 40)
 0:0/0 = 0
@@ -687,7 +687,7 @@ texture_region_size = Vector2i(40, 40)
 43:6/0 = 0
 44:6/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e3hyu"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jhx03"]
 texture = ExtResource("4_i7141")
 texture_region_size = Vector2i(40, 40)
 0:0/0 = 0
@@ -772,7 +772,7 @@ texture_region_size = Vector2i(40, 40)
 17:3/0 = 0
 18:3/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q5onr"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o8fc1"]
 texture = ExtResource("5_4mrxx")
 texture_region_size = Vector2i(40, 40)
 0:0/0 = 0
@@ -837,7 +837,7 @@ texture_region_size = Vector2i(40, 40)
 16:2/0 = 0
 17:2/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i7141"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xo05s"]
 texture = ExtResource("6_qfnet")
 texture_region_size = Vector2i(40, 40)
 0:0/0 = 0
@@ -893,11 +893,11 @@ texture_region_size = Vector2i(40, 40)
 [sub_resource type="TileSet" id="TileSet_jhx03"]
 tile_size = Vector2i(40, 40)
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_7r4gi")
-sources/1 = SubResource("TileSetAtlasSource_w7kh3")
-sources/3 = SubResource("TileSetAtlasSource_e3hyu")
-sources/4 = SubResource("TileSetAtlasSource_q5onr")
-sources/5 = SubResource("TileSetAtlasSource_i7141")
+sources/0 = SubResource("TileSetAtlasSource_e3hyu")
+sources/1 = SubResource("TileSetAtlasSource_q5onr")
+sources/3 = SubResource("TileSetAtlasSource_jhx03")
+sources/4 = SubResource("TileSetAtlasSource_o8fc1")
+sources/5 = SubResource("TileSetAtlasSource_xo05s")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4mrxx"]
 radius = 17.0
@@ -940,16 +940,14 @@ position = Vector2(265, -105)
 [node name="Collisions" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collisions"]
-position = Vector2(85, 45)
-polygon = PackedVector2Array(-430, -285, -430, -262, -422, -250, -128, -251, -125, -255, -125, -332, -85, -332, -85, -254, -79, -250, 254, -251, 260, -261, 260, -285, 275, -285, 275, -45, 310, -45, 310, -7, 275, -7, 275, 128, -77, 127, -77, 235, -134, 234, -134, 127, -411, 127, -412, 109, -422, 97, -435, 98, -445, 86, -445, 72, -445, 72, -445, 69, -265, 70, -250, 54, -250, -105, -267, -120, -414, -120, -414, -232, -423, -242, -424, -249, -434, -264, -434, -286, -467, -293, -469, 283, 302, 227, 361, -94, 284, -335, -124, -377, -436, -318, -432, -282)
+polygon = PackedVector2Array(137, -118, 160, -119, 160, -129, 285, -130, 284, -74, 159, -75, 159, -87, 135, -83, 135, -57, 143, -45, 297, -45, 305, -56, 305, -125, 294, -134, 146, -134, 136, -122)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Collisions"]
-polygon = PackedVector2Array(149, -122, 158, -129, 288, -128, 289, -76, 154, -74, 147, -84, 136, -83, 136, -57, 142, -47, 297, -45, 305, -56, 306, -125, 293, -135, 145, -135, 134, -118)
+polygon = PackedVector2Array(-345, -213, -345, -213, -336, -205, -43, -205, -40, -212, -40, -241, 0, -241, 0, -211, 4, -207, 339, -207, 344, -216, 360, -216, 360, -1, 402, -1, 402, 33, 360, 33, 360, 180, 12, 180, 13, 422, -147, 422, -147, 636, -52, 636, -51, 579, -94, 579, -94, 473, -86, 464, -74, 464, -66, 475, -54, 474, -44, 465, -32, 466, -25, 475, -15, 475, -7, 466, 9, 465, 14, 476, 24, 476, 34, 465, 55, 465, 55, 583, 13, 584, 13, 634, 27, 635, 188, 635, 189, 576, 108, 575, 107, 353, 115, 346, 127, 346, 135, 356, 149, 355, 156, 346, 168, 347, 175, 356, 187, 356, 197, 348, 210, 350, 217, 356, 228, 355, 234, 347, 246, 347, 253, 356, 268, 357, 274, 347, 287, 347, 295, 357, 306, 357, 314, 349, 334, 347, 334, 582, 254, 582, 254, 700, -294, 700, -293, 350, -265, 354, -52, 355, -52, 179, -333, 179, -333, 154, -360, 136, -360, 114, -181, 116, -165, 98, -165, -58, -183, -75, -327, -75, -332, -75, -332, -184, -360, -184, -360, -241, -345, -241, -371, -265, -374, 739, 381, 743, 370, 47, 434, 47, 430, -35, 368, -273, -342, -244)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions"]
 position = Vector2(-140, -140)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_4mrxx")
 
-[node name="Slime" parent="." instance=ExtResource("9_7r4gi")]
-position = Vector2(134, 112)
+[node name="Forest" parent="." instance=ExtResource("10_w7kh3")]
