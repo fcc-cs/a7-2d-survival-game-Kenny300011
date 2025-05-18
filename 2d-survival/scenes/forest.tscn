@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cnfda0pucuc7a"]
+[gd_scene load_steps=22 format=3 uid="uid://bh8k6vxt5vrio"]
 
 [ext_resource type="Script" uid="uid://cpsvjuyfea67j" path="res://script/forest.gd" id="1_i1yi8"]
 [ext_resource type="Texture2D" uid="uid://hu3mytl5smxk" path="res://art/Environment/spr_grass_tileset.png" id="1_xr56k"]

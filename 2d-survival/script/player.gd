@@ -170,5 +170,9 @@ func got_hit(dmg,src_position):
 	playerstop = false
 
 func gameover():
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(1).timeout
+	$"../AnimationPlayer".play("FadeOut")
+	$AnimationPlayer.play("FadeCanvas")
+	await get_tree().create_timer(2).timeout
+	get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 	

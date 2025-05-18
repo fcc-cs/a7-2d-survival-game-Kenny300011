@@ -1,10 +1,42 @@
-[gd_scene load_steps=77 format=3 uid="uid://bw23msufhj8xn"]
+[gd_scene load_steps=79 format=3 uid="uid://bw23msufhj8xn"]
 
 [ext_resource type="Script" uid="uid://d02kg0owg5w2v" path="res://script/player.gd" id="1_g2els"]
 [ext_resource type="Resource" uid="uid://c2w0cwof20nqi" path="res://inventory/playerinv.tres" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://3k6sfy523422" path="res://art/Character/survivalgame-player-green.png" id="2_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://dt2dnpsnge7an" path="res://scenes/inventory.tscn" id="4_dqkch"]
 [ext_resource type="Texture2D" uid="uid://mhviwor22njs" path="res://art/heart png.png" id="5_qlg0r"]
+
+[sub_resource type="Animation" id="Animation_qlg0r"]
+resource_name = "FadeCanvas"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthBar:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HeartPng:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tuyoq"]
+_data = {
+&"FadeCanvas": SubResource("Animation_qlg0r")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2w11d"]
 atlas = ExtResource("2_qhqgy")
@@ -645,6 +677,12 @@ y_sort_enabled = true
 script = ExtResource("1_g2els")
 inv = ExtResource("2_dqkch")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CanvasLayer")
+libraries = {
+&"": SubResource("AnimationLibrary_tuyoq")
+}
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-9.53674e-07, 2.38419e-07)
 scale = Vector2(1.28125, 1.21875)
@@ -673,6 +711,7 @@ offset_bottom = -16.0
 [node name="Marker2D" type="Marker2D" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="HealthBar" type="ProgressBar" parent="CanvasLayer"]
 offset_left = 15.0

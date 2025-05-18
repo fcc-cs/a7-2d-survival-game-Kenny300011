@@ -1,0 +1,238 @@
+[gd_scene load_steps=10 format=3 uid="uid://pvppy06icb8y"]
+
+[ext_resource type="Script" uid="uid://doj8dqvoeaj0e" path="res://scenes/gameover.gd" id="1_dy3ie"]
+[ext_resource type="FontFile" uid="uid://b2wqnd1ay3aap" path="res://Font/ByteBounce.ttf" id="1_ncp31"]
+[ext_resource type="Texture2D" uid="uid://3k6sfy523422" path="res://art/Character/survivalgame-player-green.png" id="2_2mkfd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8i2o"]
+atlas = ExtResource("2_2mkfd")
+region = Rect2(608, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mt7yr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8i2o")
+}],
+"loop": true,
+"name": &"Dead",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_dy3ie"]
+resource_name = "Go up"
+length = 3.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GAMEOVER TEXT:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(113, 79), Vector2(113, 24)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GAMEOVER TEXT:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Backtomenu:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(91, 392), Vector2(91, 359)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Backtomenu:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DeadPlayer:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.5, 3.46667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.27451)]
+}
+
+[sub_resource type="Animation" id="Animation_2mkfd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GAMEOVER TEXT:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(134, 79)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GAMEOVER TEXT:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Backtomenu:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Backtomenu:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(91, 392)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DeadPlayer:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qwp2v"]
+resource_name = "FadeOut"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeadPlayer:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.27451), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GAMEOVER TEXT:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Backtomenu:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333334, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h8i2o"]
+_data = {
+&"FadeOut": SubResource("Animation_qwp2v"),
+&"Go up": SubResource("Animation_dy3ie"),
+&"RESET": SubResource("Animation_2mkfd")
+}
+
+[node name="Gameover" type="Node2D"]
+script = ExtResource("1_dy3ie")
+
+[node name="Black" type="ColorRect" parent="."]
+offset_right = 1150.0
+offset_bottom = 651.0
+color = Color(0, 0, 0, 1)
+
+[node name="DeadPlayer" type="AnimatedSprite2D" parent="."]
+position = Vector2(556, 347)
+scale = Vector2(30.26, 30.26)
+sprite_frames = SubResource("SpriteFrames_mt7yr")
+animation = &"Dead"
+
+[node name="GAMEOVER TEXT" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 113.0
+offset_top = 79.0
+offset_right = 1032.0
+offset_bottom = 300.0
+pivot_offset = Vector2(456, 105)
+theme_override_fonts/font = ExtResource("1_ncp31")
+theme_override_font_sizes/font_size = 136
+text = "ABANDON ALL HOPE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Backtomenu" type="Label" parent="."]
+offset_left = 91.0
+offset_top = 392.0
+offset_right = 1044.0
+offset_bottom = 613.0
+pivot_offset = Vector2(472, 107)
+theme_override_fonts/font = ExtResource("1_ncp31")
+theme_override_font_sizes/font_size = 56
+text = "PRESS \"ESC\" TO GO BACK TO MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_h8i2o")
+}
