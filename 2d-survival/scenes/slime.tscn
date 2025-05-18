@@ -1,9 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://bi38uu3gb6cds"]
+[gd_scene load_steps=31 format=3 uid="uid://bi38uu3gb6cds"]
 
 [ext_resource type="Texture2D" uid="uid://ssu4xc2yivax" path="res://art/Character/survivalgame-enemy-slime.png" id="1_371uh"]
 [ext_resource type="Script" uid="uid://c6wpc4v6cy0kl" path="res://script/slime.gd" id="1_p2gj0"]
 [ext_resource type="Resource" uid="uid://6prwke1i7v3m" path="res://inventory/Items/slime_drop.tres" id="2_pjw23"]
 [ext_resource type="PackedScene" uid="uid://cbf48jydxnvh0" path="res://scenes/slime_collectable.tscn" id="3_n6pvg"]
+[ext_resource type="AudioStream" uid="uid://c88erjk3jaekb" path="res://OST & SFX/Slime_deathSFX.mp3" id="5_2npkn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2npkn"]
 radius = 7.0
@@ -209,6 +210,10 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Slime_Collectable"]
 shape = SubResource("CircleShape2D_pjw23")
 disabled = true
+
+[node name="SlimeDeathSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_2npkn")
+volume_db = 8.0
 
 [connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

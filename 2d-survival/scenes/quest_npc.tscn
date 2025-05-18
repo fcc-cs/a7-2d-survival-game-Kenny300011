@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://7k6hgu6eh2ny"]
+[gd_scene load_steps=13 format=3 uid="uid://7k6hgu6eh2ny"]
 
 [ext_resource type="Texture2D" uid="uid://ba7lca0o1e5eq" path="res://art/Character/Human-Worker-Red.png" id="1_00qlt"]
 [ext_resource type="Script" uid="uid://dkp7ysh6rrmey" path="res://scenes/quest_npc.gd" id="1_2wgef"]
 [ext_resource type="PackedScene" uid="uid://c3fgbwbcqkw34" path="res://scenes/quest.tscn" id="2_1o2gl"]
+[ext_resource type="AudioStream" uid="uid://d1uhkhu0pah1f" path="res://OST & SFX/Text.mp3" id="4_x2mh3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2wgef"]
 atlas = ExtResource("1_00qlt")
@@ -31,6 +32,54 @@ radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x2mh3"]
 
+[sub_resource type="Animation" id="Animation_x2mh3"]
+resource_name = "ColorRectFade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/ColorRect:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_txcl6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fyboh"]
+_data = {
+&"ColorRectFade": SubResource("Animation_x2mh3"),
+&"RESET": SubResource("Animation_txcl6")
+}
+
 [node name="Quest_NPC" type="CharacterBody2D"]
 script = ExtResource("1_2wgef")
 
@@ -39,6 +88,15 @@ scale = Vector2(1.281, 1.219)
 sprite_frames = SubResource("SpriteFrames_1o2gl")
 animation = &"Idle"
 frame_progress = 0.901095
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 1160.0
+offset_bottom = 651.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
@@ -50,6 +108,15 @@ shape = SubResource("CircleShape2D_2wgef")
 shape = SubResource("CircleShape2D_x2mh3")
 
 [node name="Quest" parent="." instance=ExtResource("2_1o2gl")]
+
+[node name="TextSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_x2mh3")
+volume_db = -2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fyboh")
+}
 
 [connection signal="body_entered" from="player_detection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="player_detection" to="." method="_on_player_detection_body_exited"]

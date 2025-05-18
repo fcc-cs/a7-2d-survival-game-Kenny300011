@@ -26,6 +26,7 @@ func _physics_process(delta: float) -> void:
 		$player_detection/CollisionShape2D.disabled = false
 		if player_in_area:
 			position += (player.position - position)/speed
+			move_and_slide()
 			$AnimatedSprite2D.play("Move")
 		else:
 			$AnimatedSprite2D.play("Idle")
@@ -57,7 +58,9 @@ func take_damage(damage):
 func death():
 	dead = true
 	$AnimatedSprite2D.play("Death")
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.5).timeout
+	$SlimeDeathSFX.play()
+	await get_tree().create_timer(0.5).timeout
 	drop_slime()
 	$AnimatedSprite2D.visible = false
 	$Attack/CollisionShape2D.disabled = true

@@ -40,6 +40,7 @@ func _process(delta: float) -> void:
 				move(delta)
 	if player_in_chat:
 		if Input.is_action_just_pressed("Interact"):
+			$TextSFX.play()
 			$Dialogue.start()
 			$Chat_Detection/CollisionShape2D.disabled = true
 			is_roaming = false
@@ -52,7 +53,8 @@ func choose(arr):
 	
 func move(delta):
 	if !is_chatting:
-		position += dir * speed * delta
+		velocity = dir*speed
+		move_and_slide()
 
 
 func _on_chat_detection_body_entered(body: Node2D) -> void:

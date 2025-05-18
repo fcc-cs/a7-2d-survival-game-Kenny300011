@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://pvppy06icb8y"]
+[gd_scene load_steps=12 format=3 uid="uid://pvppy06icb8y"]
 
 [ext_resource type="Script" uid="uid://doj8dqvoeaj0e" path="res://scenes/gameover.gd" id="1_dy3ie"]
 [ext_resource type="FontFile" uid="uid://b2wqnd1ay3aap" path="res://Font/ByteBounce.ttf" id="1_ncp31"]
 [ext_resource type="Texture2D" uid="uid://3k6sfy523422" path="res://art/Character/survivalgame-player-green.png" id="2_2mkfd"]
+[ext_resource type="AudioStream" uid="uid://dkhkxi7jligx" path="res://OST & SFX/GameOverOST.mp3" id="4_h8i2o"]
+[ext_resource type="AudioStream" uid="uid://chwdfniehh1er" path="res://OST & SFX/SelectSFX.mp3" id="5_mt7yr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h8i2o"]
 atlas = ExtResource("2_2mkfd")
@@ -18,6 +20,58 @@ animations = [{
 "name": &"Dead",
 "speed": 5.0
 }]
+
+[sub_resource type="Animation" id="Animation_qwp2v"]
+resource_name = "FadeOut"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeadPlayer:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.27451), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GAMEOVER TEXT:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Backtomenu:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333334, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GAMEOVEROST:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [10.0, -48.0]
+}
 
 [sub_resource type="Animation" id="Animation_dy3ie"]
 resource_name = "Go up"
@@ -145,45 +199,17 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
-
-[sub_resource type="Animation" id="Animation_qwp2v"]
-resource_name = "FadeOut"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DeadPlayer:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 2),
-"transitions": PackedFloat32Array(1, 1),
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GAMEOVEROST:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.27451), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GAMEOVER TEXT:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.0333333, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Backtomenu:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.0333334, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [10.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h8i2o"]
@@ -236,3 +262,12 @@ vertical_alignment = 1
 libraries = {
 &"": SubResource("AnimationLibrary_h8i2o")
 }
+
+[node name="GAMEOVEROST" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_h8i2o")
+volume_db = 10.0
+parameters/looping = true
+
+[node name="SelectSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_mt7yr")
+volume_db = 4.0

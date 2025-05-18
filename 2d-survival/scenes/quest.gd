@@ -73,7 +73,10 @@ func play_finish_quest_anim():
 	$"Quest Finished".visible = false
 
 func demo_finish():
+	$"../CanvasLayer/ColorRect".visible = true
 	$"Quest Finished2".visible = true
 	await get_tree().create_timer(3).timeout
 	$"Quest Finished2".visible = false
+	$"../AnimationPlayer".play("ColorRectFade")
+	await get_tree().create_timer(2).timeout
 	get_tree().change_scene_to_file("res://scenes/demo_end.tscn")

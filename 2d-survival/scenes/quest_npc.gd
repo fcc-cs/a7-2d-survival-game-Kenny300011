@@ -11,6 +11,7 @@ func _ready():
 func _process(delta: float) -> void:
 	if player_in_chat:
 		if Input.is_action_just_pressed("Interact"):
+			$TextSFX.play()
 			$Quest.next_quest()
 			is_chatting = true
 			$AnimatedSprite2D.stop()

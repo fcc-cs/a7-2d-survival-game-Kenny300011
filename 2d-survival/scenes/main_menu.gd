@@ -2,8 +2,10 @@ extends Node2D
 
 func _ready() -> void:
 	starting()
-
+	$MAINMENUOST.play()
+	
 func _on_play_pressed() -> void:
+	$SelectSFX.play()
 	$CanvasLayer/PLAY.disabled = true
 	$CanvasLayer/QUIT.disabled = true
 	$AnimationPlayer.play("Fadeout")
@@ -12,6 +14,7 @@ func _on_play_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
+	$SelectSFX.play()
 	$CanvasLayer/PLAY.disabled = true
 	$CanvasLayer/QUIT.disabled = true
 	$AnimationPlayer.play("Fadeout")

@@ -7,7 +7,7 @@ var state
 var health = 100
 @onready var health_bar = $CanvasLayer/HealthBar
 signal stick_collected
-signal apple_collected
+signal musicstop
 signal slime_collected
 var p_stop = false
 var playerdead = false
@@ -21,6 +21,7 @@ var bow_aim = false
 var playerstop = false
 @onready var camera = $Camera2D
 @onready var canvas = $CanvasLayer
+
 
 func _ready() -> void:
 	pass
@@ -59,6 +60,7 @@ func _physics_process(delta):
 		playerstop = false
 	
 	if Input.is_action_just_pressed("left_mouse") and bow_aim and bow_cooldown:
+		$"../ArrowSFX".play()
 		state = "launch"
 		bow_cooldown = false
 		var arrow_instance = arrow.instantiate()
@@ -140,10 +142,10 @@ func player():
 
 func collect(item):
 	inv.insert(item)
-	print(item)
-	if str(item) == "<Resource#-9223371998770493972>":
+	print(item.resource_name)
+	if item.resource_name == "stick":
 		emit_signal("stick_collected")
-	elif str(item) == "<Resource#-9223371995918367208>":
+	elif item.resource_name == "slime":
 		emit_signal("slime_collected")
 
 func take_damage(dmg):
@@ -158,6 +160,11 @@ func _on_forest_p_start() -> void:
 	p_stop = false
 	
 func got_hit(dmg,src_position):
+	if health > 20:
+		$"../DamageSFX".play()
+	else:
+		$"../PDeathSFX".play()
+		emit_signal("musicstop")
 	health -= dmg
 	health_bar.value = health
 	playerstop = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b4hvgfthxakmf"]
+[gd_scene load_steps=33 format=3 uid="uid://b4hvgfthxakmf"]
 
 [ext_resource type="PackedScene" uid="uid://bw23msufhj8xn" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Script" uid="uid://c6t8ud0dla7dm" path="res://scenes/world.gd" id="1_q5onr"]
@@ -12,6 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://cw8yqw6ihhvuq" path="res://scenes/npc.tscn" id="10_e3hyu"]
 [ext_resource type="PackedScene" uid="uid://bh8k6vxt5vrio" path="res://scenes/forest.tscn" id="10_w7kh3"]
 [ext_resource type="PackedScene" uid="uid://7k6hgu6eh2ny" path="res://scenes/quest_npc.tscn" id="11_e3hyu"]
+[ext_resource type="AudioStream" uid="uid://cck38fesifp45" path="res://OST & SFX/WorldOST.mp3" id="13_jhx03"]
+[ext_resource type="AudioStream" uid="uid://lmgbgy31yef1" path="res://OST & SFX/ForestOST.mp3" id="13_o8fc1"]
+[ext_resource type="AudioStream" uid="uid://ct7hi20me48gy" path="res://OST & SFX/ArrowSFX.mp3" id="15_xo05s"]
+[ext_resource type="AudioStream" uid="uid://bn175sytets52" path="res://OST & SFX/Slime Appear SFX.mp3" id="16_7t5mc"]
+[ext_resource type="AudioStream" uid="uid://bdloveemce44j" path="res://OST & SFX/DamageSFX.mp3" id="16_dss4m"]
+[ext_resource type="AudioStream" uid="uid://bprduggsck5bp" path="res://OST & SFX/DeathSFX.mp3" id="17_lakw3"]
+[ext_resource type="AudioStream" uid="uid://chwdfniehh1er" path="res://OST & SFX/SelectSFX.mp3" id="19_pm21f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e3hyu"]
 texture = ExtResource("2_71j4m")
@@ -921,21 +928,6 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_q5onr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_jhx03"]
 resource_name = "FadeOut"
 tracks/0/type = "value"
@@ -951,11 +943,70 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_xo05s"]
+resource_name = "ForestMusicFade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Forest_Theme:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-8.0, -45.0]
+}
+
+[sub_resource type="Animation" id="Animation_q5onr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("World_Theme:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_o8fc1"]
+resource_name = "WorldMusicFade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("World_Theme:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-8.0, -45.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jhx03"]
 _data = {
 &"FadeIn": SubResource("Animation_e3hyu"),
 &"FadeOut": SubResource("Animation_jhx03"),
-&"RESET": SubResource("Animation_q5onr")
+&"ForestMusicFade": SubResource("Animation_xo05s"),
+&"RESET": SubResource("Animation_q5onr"),
+&"WorldMusicFade": SubResource("Animation_o8fc1")
 }
 
 [node name="World" type="Node2D"]
@@ -1020,6 +1071,35 @@ libraries = {
 &"": SubResource("AnimationLibrary_jhx03")
 }
 
+[node name="Forest_Theme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_o8fc1")
+volume_db = -8.0
+parameters/looping = true
+
+[node name="World_Theme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_jhx03")
+parameters/looping = true
+
+[node name="ArrowSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_xo05s")
+volume_db = 5.0
+
+[node name="SlimeAppearSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_7t5mc")
+volume_db = 8.0
+
+[node name="PDeathSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_lakw3")
+volume_db = 4.0
+
+[node name="DamageSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_dss4m")
+volume_db = 5.0
+
+[node name="SelectSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_pm21f")
+
+[connection signal="musicstop" from="Player" to="Forest" method="_on_player_musicstop"]
 [connection signal="slime_collected" from="Player" to="Quest_NPC" method="_on_player_slime_collected"]
 [connection signal="stick_collected" from="Player" to="Quest_NPC" method="_on_player_stick_collected"]
 [connection signal="p_start" from="Forest" to="Player" method="_on_forest_p_start"]

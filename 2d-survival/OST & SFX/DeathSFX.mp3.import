@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bprduggsck5bp"
+path="res://.godot/imported/DeathSFX.mp3-5d3d34ee0731d27e7da03651bf794004.mp3str"
+
+[deps]
+
+source_file="res://OST & SFX/DeathSFX.mp3"
+dest_files=["res://.godot/imported/DeathSFX.mp3-5d3d34ee0731d27e7da03651bf794004.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

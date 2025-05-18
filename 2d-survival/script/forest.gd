@@ -11,6 +11,15 @@ var smoke_happened = false
 var smoke_happening = false
 signal p_stop
 signal p_start
+var current_theme: AudioStreamPlayer = null
+var can_transition: bool = true
+var slime_appeared = false
+
+func _ready():
+	$"../World_Theme".volume_db = -8
+	$"../World_Theme".play()
+	current_theme = $"../World_Theme"
+
 
 func _physics_process(delta: float) -> void:
 	if is_openingcutscene:
@@ -23,8 +32,11 @@ func _physics_process(delta: float) -> void:
 			if !smoke_happened and pathfollower.progress_ratio >= 0.822 and !smoke_happening:
 				smoke_happening = true
 				toggle_smoke()
+				if !slime_appeared:
+					$"../SlimeAppearSFX".play()
 				animationplayer.play("Zoom")
 				await get_tree().create_timer(0.5).timeout
+				slime_appeared = true
 				$ForestMain.visible = true
 				$ForestMain/TileMap/Slime6.visible = true
 				$ForestMain/TileMap/Slime5.visible = true
@@ -40,6 +52,7 @@ func _physics_process(delta: float) -> void:
 				smoke_happening = false
 				
 			if pathfollower.progress_ratio >= 0.14:
+				slime_appeared = true
 				$ForestCutscene/SmokeParticle1.emitting = true
 				await get_tree().create_timer(0.5).timeout
 				$ForestCutscene/SmokeParticle1.emitting = false
@@ -102,3 +115,28 @@ func toggle_smoke():
 	smoke8.emitting = !smoke8.emitting
 	smoke7.emitting = !smoke7.emitting
 	smoke6.emitting = !smoke6.emitting
+
+
+func _on_music_fade_area_body_entered(body: Node2D) -> void:
+	if !can_transition:
+		return
+	can_transition = false
+	var target_theme: AudioStreamPlayer
+	if current_theme == $"../World_Theme":
+		target_theme = $"../Forest_Theme"
+	else:
+		target_theme = $"../World_Theme"
+	if current_theme.is_playing():
+		var anim_name = "WorldMusicFade" if current_theme.name == "World_Theme" else "ForestMusicFade"
+		$"../AnimationPlayer".play(anim_name)
+		await $"../AnimationPlayer".animation_finished
+		current_theme.stop()
+	target_theme.volume_db = -8
+	target_theme.play()
+	current_theme = target_theme
+	await get_tree().create_timer(1.0).timeout
+	can_transition = true
+
+
+func _on_player_musicstop() -> void:
+	current_theme.stop()
